@@ -47,9 +47,22 @@ public class QrClass {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int number = Integer.parseInt(tf.getText());
+				String input = tf.getText();
+				int number = 0;
+				
+					try{
+						number = Integer.parseInt(input);
+						qrText = enterInput(number);
+					}
+					catch(NumberFormatException ex){
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(button, "Please enter a Number");
+						return;
+					}
+					
+				
 				//String s = performOcr(fileName+".png");
-				qrText = enterInput(number);
+				
 				int size = 125;
 				String filePath = "C:\\Users\\admin\\workspace\\QRCodeGenerator\\barcode.png";
 				String filePath2 = "D:\\barcode.png";
@@ -144,6 +157,9 @@ private static String enterInput(int n){
 		sb.append(text+"\n");
 		}
 	return sb.toString();
+	
+}
+private static void setUpQRCodeDisplay(){
 	
 }
 
