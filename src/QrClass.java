@@ -60,34 +60,34 @@ public class QrClass {
 						return;
 					}
 					
-				
+				Utils.getQrCode(qrText);
 				//String s = performOcr(fileName+".png");
 				
-				int size = 125;
-				String filePath = "C:\\Users\\admin\\workspace\\QRCodeGenerator\\barcode.png";
-				String filePath2 = "D:\\barcode.png";
-				String fileType = "png";
-				//File file = new File(filePath);
-				String temp = Paths.get(".").toAbsolutePath().normalize().toString();
-				String fpath = temp + "\\barcode.png";
-				File file = new File(fpath);
-				try {
-					createQRImage(file, qrText, size, fileType);
-				    Desktop dt = Desktop.getDesktop();
-				    dt.open(file);
-				} catch (WriterException | IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Ocr.setUp();
-				Ocr ocr = new Ocr();
-				ocr.startEngine("eng", Ocr.SPEED_FASTEST);
-				String s = ocr.recognize(new File[] {file},
-						   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
-				
-	            ta.append(s);
-	            ocr.stopEngine();
-				
+//				int size = 125;
+////				String filePath = "C:\\Users\\admin\\workspace\\QRCodeGenerator\\barcode.png";
+////				String filePath2 = "D:\\barcode.png";
+//				String fileType = "png";
+//				//File file = new File(filePath);
+//				String temp = Paths.get(".").toAbsolutePath().normalize().toString() + "\\barcode.png" ;
+//				String fpath = temp + "\\barcode.png";
+//				File file = new File(fpath);
+//				try {
+//					createQRImage(file, qrText, size, fileType);
+//				    Desktop dt = Desktop.getDesktop();
+//				    dt.open(file);
+//				} catch (WriterException | IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				Ocr.setUp();
+//				Ocr ocr = new Ocr();
+//				ocr.startEngine("eng", Ocr.SPEED_FASTEST);
+//				String s = ocr.recognize(new File[] {file},
+//						   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
+//				
+//	            ta.append(s);
+//	            ocr.stopEngine();
+//				
 			}
 		});
 		f.add(label);
@@ -102,9 +102,9 @@ public class QrClass {
 		
 		
 	//Set up OCR engine
-		Ocr.setUp();
-		Ocr ocr = new Ocr();
-		ocr.startEngine("eng", Ocr.SPEED_FASTEST);
+//		Ocr.setUp();
+//		Ocr ocr = new Ocr();
+//		ocr.startEngine("eng", Ocr.SPEED_FASTEST);
 		//qrText = "www.google.com\nName: Abdul Kadir\n Age: 19\n Aadhar: 32434324\n Pan card:34823947";
 		//qrText = enterInput();
 //		int size = 125;
@@ -114,10 +114,15 @@ public class QrClass {
 //		createQRImage(file, qrText, size, fileType);
 //		String s = ocr.recognize(new File[] {new File("barcode.png")},
 //				   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
-		new QrClass();
-		System.out.println("Contents of the barcode: "+ qrText);
+		//new QrClass();
+		qrText = enterInput(3);
+		
+		Utils.getQrCode(qrText);
+		String filePath = Utils.filePath;
+		File file = new File(filePath);
+		String text = Utils.extractQrCodeFromFile(file);
+		System.out.println("Contents of the barcode: "+ text);
 		System.out.println("DONE");
-		ocr.stopEngine();
 		
 	}
 	private static void createQRImage(File qrFile, String qrCodeText, int size,
@@ -154,7 +159,12 @@ private static String enterInput(int n){
 	sb = new StringBuffer();
 	for(int i=0; i<n ; i++){
 		String text = (JOptionPane.showInputDialog(null, "Enter attribute: "+ (i+1)));
-		sb.append(text+"\n");
+		if(text == null){
+			JOptionPane.showMessageDialog(null, "Please enter something!");
+		}
+		else{
+			sb.append(text);
+			}
 		}
 	return sb.toString();
 	
