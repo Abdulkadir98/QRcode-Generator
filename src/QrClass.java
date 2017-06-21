@@ -139,7 +139,7 @@ public class QrClass {
 			String filePath = Utils.filePath + "\\" + fileName + "." + Utils.fileType;
 			//File file = new File(filePath);
 			String text = Utils.extractQrCodeFromFile(filePath);
-			System.out.println("Contents of the barcode: "+ text);
+			System.out.println(text);
 			System.out.println("DONE");
 		}
 		else System.out.println("\nInvalid choice");
