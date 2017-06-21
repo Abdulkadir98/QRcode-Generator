@@ -34,7 +34,7 @@ public  final class Utils {
 												.normalize().toString();
 	
 	public static final int size = 125;
-	public static final String fileType = "png";
+	public static final String fileType = ".png";
     public static String charset = "UTF-8"; // or "ISO-8859-1"
 
 	private static void createQRImage(File qrFile, String qrCodeText, int size, 
