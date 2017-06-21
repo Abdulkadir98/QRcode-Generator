@@ -75,7 +75,7 @@ public  final class Utils {
 	// accepts String as input
 	// creates an image file with the QR code.
 	public static void createQrCode(String qrText, String fileName){
-		String path = filePath +"\\"+fileName+"."+fileType;
+		String path = Paths.get(filePath, fileName).toString() + "." + fileType;
 		File file = new File(path);
 		try {
 			createQRImage(file, qrText, size, fileType);
@@ -114,7 +114,6 @@ public  final class Utils {
 			extractedText = "Contents of the QR Code: " + readQRCode(path);
 		} catch (NotFoundException | IOException e) {
 			e.printStackTrace();
-		} catch (com.google.zxing.NotFoundException exception) {
 		    System.out.println("Image does not contain a recognizable QR Code");
 		}
 		return extractedText;

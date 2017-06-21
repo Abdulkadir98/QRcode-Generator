@@ -136,8 +136,7 @@ public class QrClass {
 		else if(ch==2){
 			System.out.println("Enter file name:");
 			String fileName = sc.next();
-			String filePath = Utils.filePath + "\\" + fileName + "." + Utils.fileType;
-			//File file = new File(filePath);
+			String filePath = Paths.get(Utils.filePath, fileName).toString() + "." + Utils.fileType;
 			String text = Utils.extractQrCodeFromFile(filePath);
 			System.out.println(text);
 			System.out.println("DONE");
