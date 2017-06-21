@@ -111,10 +111,11 @@ public  final class Utils {
 
 		String extractedText = null;
 		try {
-			extractedText = readQRCode(path);
+			extractedText = "Contents of the QR Code: " + readQRCode(path);
 		} catch (NotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (com.google.zxing.NotFoundException exception) {
+		    System.out.println("Image does not contain a recognizable QR Code");
 		}
 		return extractedText;
 	}
