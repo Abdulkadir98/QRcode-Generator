@@ -34,7 +34,7 @@ public  final class Utils {
 												.normalize().toString();
 	
 	public static final int size = 125;
-	public static final String fileType = "png";
+	public static final String fileType = ".png";
     public static String charset = "UTF-8"; // or "ISO-8859-1"
 
 	private static void createQRImage(File qrFile, String qrCodeText, int size, 
@@ -111,10 +111,11 @@ public  final class Utils {
 
 		String extractedText = null;
 		try {
-			extractedText = readQRCode(path);
+			extractedText = "Contents of the QR Code: " + readQRCode(path);
 		} catch (NotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (com.google.zxing.NotFoundException exception) {
+		    System.out.println("Image does not contain a recognizable QR Code");
 		}
 		return extractedText;
 	}

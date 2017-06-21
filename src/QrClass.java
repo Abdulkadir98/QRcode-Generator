@@ -136,10 +136,11 @@ public class QrClass {
 		else if(ch==2){
 			System.out.println("Enter file name:");
 			String fileName = sc.next();
-			String filePath = Utils.filePath + "\\" + fileName + "." + Utils.fileType;
+			String filePath = Paths.get(Utils.filePath, fileName, Utils.fileType);
+			// String filePath =  Utils.filePath + "\\" + fileName + "." + Utils.fileType;  // Not Portable across OSs
 			//File file = new File(filePath);
 			String text = Utils.extractQrCodeFromFile(filePath);
-			System.out.println("Contents of the barcode: "+ text);
+			System.out.println(text);
 			System.out.println("DONE");
 		}
 		else System.out.println("\nInvalid choice");
