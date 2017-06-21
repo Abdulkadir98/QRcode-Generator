@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/admin/Downloads/core-3.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/admin/Desktop/OpenTap - Internship/Ocr softwares/aocr.jar"/>
+	<classpathentry kind="lib" path="lib/aocr.jar"/>
+	<classpathentry kind="lib" path="lib/core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/admin/workspace/QRCodeGenerator/lib/zxing-j2se-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

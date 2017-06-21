@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.asprise.ocr.Ocr;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -60,7 +60,7 @@ public class QrClass {
 						return;
 					}
 					
-				Utils.getQrCode(qrText);
+				//Utils.createQrCode(qrText);
 				//String s = performOcr(fileName+".png");
 				
 //				int size = 125;
@@ -115,15 +115,38 @@ public class QrClass {
 //		String s = ocr.recognize(new File[] {new File("barcode.png")},
 //				   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
 		//new QrClass();
-		qrText = enterInput(3);
+		//qrText = enterInput(3);
+		System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code");
+		Scanner sc = new Scanner(System.in);
+		int ch = sc.nextInt();
+		if(ch==1){
+			System.out.println("Enter the number of attributes:");
+			StringBuffer sb = new StringBuffer();
+			int n = sc.nextInt();
+			for(int i = 0; i<n; i++){
+				System.out.println("\nEnter attribute number: "+ (i+1));
+				String text = sc.next();
+				sb.append(text);
+			}
+			qrText = sb.toString();
+			System.out.println("Enter file name(without format):");
+			String fileName = sc.next();
+			Utils.createQrCode(qrText,fileName);
+		}
+		else if(ch==2){
+			System.out.println("Enter file name:");
+			String fileName = sc.next();
+			String filePath = Utils.filePath + "\\" + fileName + "." + Utils.fileType;
+			//File file = new File(filePath);
+			String text = Utils.extractQrCodeFromFile(filePath);
+			System.out.println("Contents of the barcode: "+ text);
+			System.out.println("DONE");
+		}
+		else System.out.println("\nInvalid choice");
+
+//		
 		
-		Utils.getQrCode(qrText);
-		String filePath = Utils.filePath;
-		File file = new File(filePath);
-		String text = Utils.extractQrCodeFromFile(file);
-		System.out.println("Contents of the barcode: "+ text);
-		System.out.println("DONE");
-		
+//		
 	}
 	private static void createQRImage(File qrFile, String qrCodeText, int size,
 			String fileType) throws WriterException, IOException {
