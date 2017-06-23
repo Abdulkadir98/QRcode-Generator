@@ -119,7 +119,7 @@ public class QrClass {
 		//new QrClass();
 		//qrText = enterInput(3);
 
-		String choice;
+		char choice;
 		HashMap<String,String> map = new HashMap<>();
 		do {
 			System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code\n" +
@@ -171,8 +171,9 @@ public class QrClass {
 			}
 			else System.out.println("\nInvalid choice");
 			System.out.println("Do you wish to continue?Y/N");
-			choice = sc.next();
-		} while(choice == "Y" || choice == "y");
+			choice = sc.next().toLowerCase().charAt(0);
+			System.out.println();
+		} while(choice == 'y');
 	}
 
 	private static void createQRImage(File qrFile, String qrCodeText, int size,
