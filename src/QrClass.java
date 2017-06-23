@@ -116,7 +116,7 @@ public class QrClass {
 //				   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
 		//new QrClass();
 		//qrText = enterInput(3);
-		System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code");
+		System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code\n3. Check if ");
 		Scanner sc = new Scanner(System.in);
 		int ch = sc.nextInt();
 		if(ch==1){
@@ -140,6 +140,13 @@ public class QrClass {
 			String text = Utils.extractQrCodeFromFile(filePath);
 			System.out.println(text);
 			System.out.println("DONE");
+		}
+		else if (ch == 3) {
+			System.out.println("Enter file name:");
+			String fileName = sc.next();
+			String filePath = Paths.get(Utils.filePath, fileName).toString() + "." + Utils.fileType;
+			Boolean response = Utils.checkIfQRCode(filePath);
+			System.out.println(response);
 		}
 		else System.out.println("\nInvalid choice");
 

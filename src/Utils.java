@@ -119,4 +119,16 @@ public  final class Utils {
 		return extractedText;
 	}
 
+	public static Boolean checkIfQRCode(String path) {
+		try {
+			readQRCode(path);
+			System.out.println("Image contains a recognizable QR Code");
+			return true;
+		} catch (NotFoundException | IOException e) {
+			e.printStackTrace();
+			System.out.println("Image does not contain a recognizable QR Code");
+			return false;
+		}
+	}
+
 }
