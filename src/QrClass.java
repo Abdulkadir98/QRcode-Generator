@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -120,40 +121,51 @@ public class QrClass {
 
 		String choice;
 		HashMap<String,String> map = new HashMap<>();
-		do{
+		do {
 			System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code\n" +
 					"3. Check if Image is QR Code ");
 			Scanner sc = new Scanner(System.in);
 			int ch = sc.nextInt();
 			if(ch==1){
 				System.out.println("Enter the number of key and value pairs:");
-				StringBuffer sb = new StringBuffer();
+				String qrText = "";
 				int n = sc.nextInt();
-				for(int i = 0; i<n; i++){
+				for(int i = 0; i < n; i++){
 					System.out.println("\nEnter key: "+ (i+1)+" (without spaces)");
 					String key = sc.next();
 					System.out.println("\nEnter value: "+ (i+1)+" (without spaces)");
 					String value = sc.next();
-					map.put(key,value);
-					
+					qrText += key + ": " + value;
+					if (i != n-1) {
+						qrText += ", ";
+					}
 				}
-				qrText = map.toString();
 				System.out.println("Enter file name(without format):");
 				String fileName = sc.next();
 				Utils.createQrCode(qrText,fileName);
 			}
 			else if(ch==2){
+				System.out.println("Enter file path:");
+				sc.nextLine();
+				String filePath = sc.nextLine();
+
 				System.out.println("Enter file name:");
-				String fileName = sc.next();
-				String filePath = Paths.get(Utils.filePath, "images", fileName).toString() + "." + Utils.fileType;
+				String fileName = sc.next() + "." + Utils.fileType;
+
+				filePath = Paths.get(filePath, fileName).toString();
 				String text = Utils.extractQrCodeFromFile(filePath);
 				System.out.println(text);
 				System.out.println("DONE");
 			}
 			else if (ch == 3) {
+				System.out.println("Enter file path:");
+				sc.nextLine();
+				String filePath = sc.nextLine();
+
 				System.out.println("Enter file name:");
-				String fileName = sc.next();
-				String filePath = Paths.get(Utils.filePath, "images", fileName).toString() + "." + Utils.fileType;
+				String fileName = sc.next() + "." + Utils.fileType;
+
+				filePath = Paths.get(filePath, fileName).toString();
 				Boolean response = Utils.checkIfQRCode(filePath);
 				System.out.println(response);
 			}
