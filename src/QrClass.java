@@ -117,45 +117,12 @@ public class QrClass {
 //				   Ocr.RECOGNIZE_TYPE_BARCODE, Ocr.OUTPUT_FORMAT_PLAINTEXT);
 		//new QrClass();
 		//qrText = enterInput(3);
-<<<<<<< Updated upstream
-		System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code\n3. Check if ");
-		Scanner sc = new Scanner(System.in);
-		int ch = sc.nextInt();
-		if(ch==1){
-			System.out.println("Enter the number of attributes:");
-			StringBuffer sb = new StringBuffer();
-			int n = sc.nextInt();
-			for(int i = 0; i<n; i++){
-				System.out.println("\nEnter attribute number: "+ (i+1));
-				String text = sc.next();
-				sb.append(text);
-			}
-			qrText = sb.toString();
-			System.out.println("Enter file name(without format):");
-			String fileName = sc.next();
-			Utils.createQrCode(qrText,fileName);
-		}
-		else if(ch==2){
-			System.out.println("Enter file name:");
-			String fileName = sc.next();
-			String filePath = Paths.get(Utils.filePath, fileName).toString() + "." + Utils.fileType;
-			String text = Utils.extractQrCodeFromFile(filePath);
-			System.out.println(text);
-			System.out.println("DONE");
-		}
-		else if (ch == 3) {
-			System.out.println("Enter file name:");
-			String fileName = sc.next();
-			String filePath = Paths.get(Utils.filePath, fileName).toString() + "." + Utils.fileType;
-			Boolean response = Utils.checkIfQRCode(filePath);
-			System.out.println(response);
-		}
-		else System.out.println("\nInvalid choice");
-=======
+
 		String choice;
 		HashMap<String,String> map = new HashMap<>();
 		do{
-			System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code");
+			System.out.println("Do you wish to:\n1. Create a QR code\n2. Extract from QR code\n" +
+					"3. Check if Image is QR Code ");
 			Scanner sc = new Scanner(System.in);
 			int ch = sc.nextInt();
 			if(ch==1){
@@ -178,22 +145,24 @@ public class QrClass {
 			else if(ch==2){
 				System.out.println("Enter file name:");
 				String fileName = sc.next();
-				String filePath = Paths.get(Utils.filePath, fileName).toString() + "." + Utils.fileType;
+				String filePath = Paths.get(Utils.filePath, "images", fileName).toString() + "." + Utils.fileType;
 				String text = Utils.extractQrCodeFromFile(filePath);
 				System.out.println(text);
 				System.out.println("DONE");
 			}
+			else if (ch == 3) {
+				System.out.println("Enter file name:");
+				String fileName = sc.next();
+				String filePath = Paths.get(Utils.filePath, "images", fileName).toString() + "." + Utils.fileType;
+				Boolean response = Utils.checkIfQRCode(filePath);
+				System.out.println(response);
+			}
 			else System.out.println("\nInvalid choice");
 			System.out.println("Do you wish to continue?Y/N");
 			choice = sc.next();
-		}while(choice == "Y" || choice == "y");
-		
->>>>>>> Stashed changes
-
-//		
-		
-//		
+		} while(choice == "Y" || choice == "y");
 	}
+
 	private static void createQRImage(File qrFile, String qrCodeText, int size,
 			String fileType) throws WriterException, IOException {
 		// Create the ByteMatrix for the QR-Code that encodes the given String

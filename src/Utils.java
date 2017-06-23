@@ -75,7 +75,7 @@ public  final class Utils {
 	// accepts String as input
 	// creates an image file with the QR code.
 	public static void createQrCode(String qrText, String fileName){
-		String path = Paths.get(filePath, fileName).toString() + "." + fileType;
+		String path = Paths.get(filePath, "images", fileName).toString() + "." + fileType;
 		File file = new File(path);
 		try {
 			createQRImage(file, qrText, size, fileType);

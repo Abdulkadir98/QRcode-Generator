@@ -1,2 +1,5 @@
 /bin/
 /images/
+.idea/
+.metadata/
+QRCodeGenerator.iml
